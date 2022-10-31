@@ -1,0 +1,101 @@
+:root {
+  --light-white: #f2f2f2;
+  --white: #ffffff;
+  --green: #33d6a02e;
+  --dark-green: #33d69f;
+  --orange: #ff8f00;
+  --ligh-orange: #ff8f0038;
+  --dark-gray: #373b53;
+  --light-gray: #373b5321;
+  --grayish-blue: #858BB2;
+}
+
+body {
+  background-color: var(--light-white);
+}
+
+.searchbar {
+  display: flex;
+  flex-direction: row;
+  width: 45.625rem;
+  margin: 0 auto;
+}
+
+.invoices {
+  width: 45.625rem;
+  display: flex;
+  flex-direction: column;
+  margin: 4.687rem auto 0;
+}
+
+.invoice {
+  background-color: var(--white);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem auto;
+  height: 4.5rem;
+  font-family: "Spartan";
+  font-style: normal;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.invoice--id {
+  margin-left: 2rem;
+  flex: 1;
+  font-weight: 700;
+}
+
+.invoice--date {
+  color: var(--grayish-blue);
+  flex: 1;
+}
+
+.invoice--name {
+  color: var(--grayish-blue);
+  flex: 1;
+}
+
+.invoice--total {
+  width: 6.25rem;
+  flex: 1;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  margin-right: 2.5rem;
+}
+
+.invoice--status--box {
+  text-transform: capitalize;
+  width: 6.5;
+  height: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  margin-right: 3rem;
+  flex: 1;
+}
+
+.invoice--status {
+  margin-top: 0.8125rem;
+}
+
+.invoice--status--paid {
+  background-color: var(--green);
+  color: var(--dark-green);
+  font-weight: bold;
+  margin-right: 3rem;
+  flex: 1;
+}
+
+.invoice--status--pending {
+  background-color: var(--ligh-orange);
+  color: var(--orange);
+}
+
+.invoice--status--draft {
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+}
