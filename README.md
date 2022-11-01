@@ -74,7 +74,7 @@ You can use the “production” API to implement most of the challenge, but if 
 - [ ] User should be able to click the invoice row.
 - [ ] The click action should open a confirmation modal confirming if the user wants to mark the invoice as “paid”.
 - [ ] Confirming the action should mark the selected invoice as “paid”.
--  **TIP:** The action should send a `PUT` request with the invoice id and the `status=“paid"`.
+-  **TIP:** The action should send a `PATCH` request with the invoice id and the `status=“paid"`.
 -  **IMPORTANT:** in order to develop this, you'll have to run the API locally to don't mess with “production” data. Refer to the “_Running the API locally”_
 
 --- 
