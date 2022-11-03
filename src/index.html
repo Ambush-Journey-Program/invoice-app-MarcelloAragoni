@@ -5,21 +5,41 @@
     <title>Invoice App</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css?family=Spartan"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <nav class="searchbar">
-      <p>
+      <p class="searchbar--title">
         Invoices
-        <span>there are 7 total invoices</span>
+        <span class="searchbar--count">There are 7 total invoices</span>
       </p>
-      <p>filter by status</p>
+      <form id="searchForm">
+        <input id="clientName" name="clientName" type="text" class="input--filter">
+          <label for="status__filter" class="searchbar--filter">Filter by status</label>
+          <select name="status__filter" id="status">
+            <option value="">--</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+            <option value="draft">Draft</option>
+          </select>
+      <button class="button">Search</button>
+      </form>
     </nav>
-    <ul data-invoices='1' class="invoices">
-    </ul>
+    <ul id="teste" data-invoices="1" class="invoices"></ul>
+    <div id="errorimage" class="found">
+      <img src="./images/notfound.svg" class="found--image" alt="not found image">
+      <p class="found--title">There is nothing here</p>
+      <p class="found--info">Create an invoice by clicking the New Invoice button and get started</p>
+    </div>
     <script type="module" src="main.js"></script>
   </body>
 </html>

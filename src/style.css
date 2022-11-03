@@ -4,21 +4,44 @@
   --green: #33d6a02e;
   --dark-green: #33d69f;
   --orange: #ff8f00;
-  --ligh-orange: #ff8f0038;
+  --light-orange: #ff8f0038;
   --dark-gray: #373b53;
   --light-gray: #373b5321;
   --grayish-blue: #858BB2;
+  --button: #7C5DFA;
 }
 
 body {
   background-color: var(--light-white);
+  font-family: 'spartan';
 }
 
 .searchbar {
   display: flex;
   flex-direction: row;
   width: 45.625rem;
-  margin: 0 auto;
+  margin: 4.5rem auto 0;
+}
+
+.searchbar--title {
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.searchbar--count {
+  font-size: 12;
+  line-height: 15px;
+  margin-top: .5rem;
+}
+
+.searchbar--filter {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 700;
 }
 
 .invoices {
@@ -40,6 +63,7 @@ body {
   font-style: normal;
   font-size: 12px;
   line-height: 15px;
+  border-radius: 0.5rem;
 }
 
 .invoice--id {
@@ -76,6 +100,7 @@ body {
   font-weight: 700;
   margin-right: 3rem;
   flex: 1;
+  border-radius: 0.5rem;
 }
 
 .invoice--status {
@@ -91,11 +116,96 @@ body {
 }
 
 .invoice--status--pending {
-  background-color: var(--ligh-orange);
+  background-color: var(--light-orange);
   color: var(--orange);
 }
 
 .invoice--status--draft {
   background-color: var(--light-gray);
   color: var(--dark-gray);
+}
+
+.found {
+  display: none;
+  width: 15.08375rem;
+  height: 21.3125rem;
+  flex-direction: column;
+  align-items: center;
+  margin: 8.8125rem auto 0;
+}
+
+.notfound {
+  display: flex;
+}
+
+.found--image {
+  width: 100%;
+  height: 12.5rem;
+  margin-bottom: 4rem;
+}
+
+.found--title {
+  width: 14.625rem;
+  font-size: 20px;
+  line-height: 22.4px;
+  margin-bottom: 1.5rem;
+}
+
+.found--info {
+  color: var(--grayish-blue);
+  width: 14.625rem;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+#searchForm {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+}
+
+.searchbar--filter {
+  font-size: 12px;
+  line-height: 15px;
+  margin-right: .5rem;
+  width: 6rem;
+}
+
+#status {
+  width: 1rem;
+  border: none;
+  background-color: var(--light-white);
+  color: var(--button);
+  margin-right: 2rem;
+}
+
+.button {
+  width: 5.375rem;
+  height: 3rem;
+  background-color: var(--button);
+  color: var(--white);
+  border: none;
+  border-radius: 2rem;
+}
+
+#inputForm {
+  flex: 1;
+  width: 15rem;
+  height: 3rem;
+  text-align: center;
+}
+
+.input--filter {
+  border: 1px black solid;
+  width: 14rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--light-white);
+  margin-right: 1.5rem;
+}
+
+.ul--empty {
+  display: none;
 }
