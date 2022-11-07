@@ -42,7 +42,7 @@ async function handleDelete(event) {
   event.preventDefault();
   idInvoice = event.target.value;
 
-  handleRemoveClass("delete--screen", "delete--screen--disable");//abre tela
+  handleRemoveClass("delete--screen", "delete--screen--disable");//open delete window
 }
 
 function buildInvoiceList(invoices) {
@@ -73,7 +73,7 @@ async function handleResponse() {
   buildInvoiceList(invoiceHtml);
 }
 
-//---Monta a lista---//
+//---make the list of invoices---//
 
 async function handleSubmit(event) {
   event.preventDefault();
@@ -94,33 +94,27 @@ async function handleSubmit(event) {
   await handleResponse();
 }
 
-//---Faz o Delete---//
+//---responsable for the delete fetch---//
 
 let idInvoice;
 
-const confirmButton = document.querySelector("#formConfirm");
-confirmButton.addEventListener("click" , handleConfirmDelete)
+const confirmButton = document.querySelector("#confirmDeleteButton");
+confirmButton.addEventListener("click" , handleConfirmDelete);
+
+const cancelButton = document.querySelector("#cancelDeleteButton");
+cancelButton.addEventListener("click" , () => handleAddClass("delete--screen", "delete--screen--disable"));
 
 async function handleFetchDelete(id){
-  fetch(`${BASE_URL}/${id}`, {method:"DELETE"});
+  await fetch(`${BASE_URL}/${id}`, {method:"DELETE"});
+}
+
+async function handleConfirmDelete() {
+
+  await handleFetchDelete(idInvoice);
 
   await handleResponse();
 
   handleAddClass("delete--screen", "delete--screen--disable");
-
-}
-
-function handleConfirmDelete(event) {
-  event.preventDefault();
-  const button = event.srcElement.value;
-
-  if (button == "nao") {
-
-    handleAddClass("delete--screen", "delete--screen--disable");
-
-    return;
-  }
-  handleFetchDelete(idInvoice)
 }
 
 
