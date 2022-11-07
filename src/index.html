@@ -31,7 +31,7 @@
             <option value="pending">Pending</option>
             <option value="draft">Draft</option>
           </select>
-      <button class="button">Search</button>
+        <button class="button">Search</button>
       </form>
     </nav>
     <ul id="teste" data-invoices="1" class="invoices"></ul>
@@ -39,6 +39,18 @@
       <img src="./images/notfound.svg" class="found--image" alt="not found image">
       <p class="found--title">There is nothing here</p>
       <p class="found--info">Create an invoice by clicking the New Invoice button and get started</p>
+    </div>
+
+    <div id="delete--screen" class="delete--screen delete--screen--disable">
+      <div class="delete__screen--text">
+        <h2 class="delete__screen--title">Exclusão de Invoice</h2>
+        <p class="delete__screen--content">Tem certeza que deseja excluir o invoice?</p>
+        <form id="formConfirm">
+          <button id="no-button" value="nao" class="button button--delete">Não</button>
+          <button id="yes-button" value="sim" class="button button--delete">Sim</button>
+        </form>
+      </div>
+      <div class="delete--layer"></div>
     </div>
     <script type="module" src="main.js"></script>
   </body>
