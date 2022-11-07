@@ -1,50 +1,17 @@
 import { BASE_URL, DEFAULT_SORT, DEFAULT_SORT_ORDER } from "./constants.js";
-import { handleAddClass,handleRemoveClass } from "./utilities.js";
+import { handleAddClass,handleRemoveClass} from "./utilities.js";
 
 const submitEl = document.querySelector("#searchForm");
+submitEl.addEventListener("submit", handleSubmit);
 
-
-async function handleSubmit(event) {
-  event.preventDefault();
-
-  const [clientNameEl, statusEl] = event.target;
-
-  const sortParams = {
-    _sort: DEFAULT_SORT,
-    _order: DEFAULT_SORT_ORDER,
-  }
-
-  const urlParams = new URLSearchParams({
-    ...sortParams,
-  });
-
-  const filterParams = [
-    { name: 'clientName', value: clientNameEl.value },
-    { name: 'status', value: statusEl.value },
-  ]
-
-  filterParams.forEach(filter => {
-    if (filter.value) {
-      urlParams.set(filter.name, filter.value)
-    }
-  });
-
-  const response = await handleFetchUrl(`${BASE_URL}?${urlParams}`);
-
-  if (response.length === 0){
-    handleAddClass('errorimage','notfound')
-    handleAddClass('teste', 'ul--empty')
-
-    return;
-  }
-
-  handleRemoveClass('errorimage', 'notfound')
-  handleRemoveClass('teste', 'ul--empty')
-  const invoiceHtml = formatInvoiceListHtml(response);
-
-  buildInvoiceList(invoiceHtml);
+const sortParams = {
+  _sort: DEFAULT_SORT,
+  _order: DEFAULT_SORT_ORDER,
 }
 
+let urlParams = new URLSearchParams({
+  ...sortParams,
+});
 
 async function handleFetchUrl(url) {
   const response = await fetch(url);
@@ -63,17 +30,93 @@ function formatInvoiceListHtml(invoices) {
         <div class="invoice--status--box invoice--status--${invoice.status}">
           <p class="invoice--status" >${invoice.status}</p>
         </div>
+        <form id="deleteForm">
+          <button value="${invoice.id}" class="button button--trash"></button>
+        </form>
       </li>
       `;
   });
 }
 
+async function handleDelete(event) {
+  event.preventDefault();
+  idInvoice = event.target.value;
+
+  handleRemoveClass("delete--screen", "delete--screen--disable");//open delete window
+}
+
 function buildInvoiceList(invoices) {
   const el = document.querySelector('[data-invoices="1"]');
   el.innerHTML = invoices.join("");
+
+  const deleteElements = document.querySelectorAll("#deleteForm");
+
+  deleteElements.forEach((deleteEl)=>{
+    deleteEl.addEventListener("click", handleDelete);
+  });
 }
 
-submitEl.addEventListener("submit", handleSubmit);
+async function handleResponse() {
+  const response = await handleFetchUrl(`${BASE_URL}?${urlParams}`);
+
+  if (response.length === 0){
+    handleAddClass('errorimage','notfound')
+    handleAddClass('teste', 'ul--empty')
+
+    return;
+  }
+
+  handleRemoveClass('errorimage', 'notfound')
+  handleRemoveClass('teste', 'ul--empty')
+  const invoiceHtml = formatInvoiceListHtml(response);
+
+  buildInvoiceList(invoiceHtml);
+}
+
+//---make the list of invoices---//
+
+async function handleSubmit(event) {
+  event.preventDefault();
+
+  const [clientNameEl, statusEl] = event.target;
+
+  const filterParams = [
+    { name: 'clientName', value: clientNameEl.value },
+    { name: 'status', value: statusEl.value },
+  ]
+
+  filterParams.forEach(filter => {
+    if (filter.value) {
+      urlParams.set(filter.name, filter.value)
+    }
+  });
+
+  await handleResponse();
+}
+
+//---responsable for the delete fetch---//
+
+let idInvoice;
+
+const confirmButton = document.querySelector("#confirmDeleteButton");
+confirmButton.addEventListener("click" , handleConfirmDelete);
+
+const cancelButton = document.querySelector("#cancelDeleteButton");
+cancelButton.addEventListener("click" , () => handleAddClass("delete--screen", "delete--screen--disable"));
+
+async function handleFetchDelete(id){
+  await fetch(`${BASE_URL}/${id}`, {method:"DELETE"});
+}
+
+async function handleConfirmDelete() {
+
+  await handleFetchDelete(idInvoice);
+
+  await handleResponse();
+
+  handleAddClass("delete--screen", "delete--screen--disable");
+}
+
 
 
 // async function handleSubmit(event) {

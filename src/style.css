@@ -98,7 +98,7 @@ body {
   height: 2.5rem;
   text-align: center;
   font-weight: 700;
-  margin-right: 3rem;
+  margin-right: 2rem;
   flex: 1;
   border-radius: 0.5rem;
 }
@@ -111,7 +111,6 @@ body {
   background-color: var(--green);
   color: var(--dark-green);
   font-weight: bold;
-  margin-right: 3rem;
   flex: 1;
 }
 
@@ -197,6 +196,15 @@ body {
   text-align: center;
 }
 
+.button--trash {
+  width: 2rem;
+  height: 2rem;
+  background-image: url('./images/delete_black_24dp.svg');
+  background-repeat: space;
+  margin-right: 1rem;
+  background-position: center;
+}
+
 .input--filter {
   border: 1px black solid;
   width: 14rem;
@@ -208,4 +216,68 @@ body {
 
 .ul--empty {
   display: none;
+}
+
+.delete--screen{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 101;
+  background-size: cover;
+  padding: 20px;
+}
+
+#formConfirm{
+  margin-top: 2rem;
+  z-index: 9999;
+}
+
+.delete--screen--disable {
+  display: none;
+}
+
+.delete__screen--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  width: 500px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 101;
+  background-color: var(--white);
+}
+
+.delete__screen--title {
+  color: var(--button);
+  font-weight: bold;
+  font-size: 38px;
+}
+
+.delete__screen--content {
+  margin-top: 2rem;
+  font-size: 20px;
+}
+
+.button--delete {
+  margin-left: 2rem;
+}
+
+.delete--layer{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(20, 20, 20, 0.5);
+  z-index: 100;
 }
