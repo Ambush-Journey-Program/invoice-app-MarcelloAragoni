@@ -354,6 +354,7 @@ body {
 .patch__screen--content {
   margin-top: 2rem;
   font-size: 20px;
+  width: 350px;
 }
 
 .button--patch {
