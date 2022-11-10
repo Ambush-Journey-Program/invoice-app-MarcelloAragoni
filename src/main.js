@@ -136,16 +136,11 @@ async function handleConfirmDelete() {
 //--responsable for the patch fetch--//
 
 async function handleFetchPatch(id) {
+  const newStatus = statusInvoice === 'pending' ? 'paid' : 'pending';
 
-  if (statusInvoice == 'pending') {
     fetch(`${BASE_URL}/${id}` , {
       method: "PATCH", headers: { "Content-type": "application/json" }, body: JSON.stringify({
-        status: "paid"})});
-    return;
-  }
-  fetch(`${BASE_URL}/${id}` , {
-    method: "PATCH", headers: { "Content-type": "application/json" }, body: JSON.stringify({
-      status: "pending"})});
+        status: newStatus})});
 
 }
 
