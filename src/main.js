@@ -27,9 +27,11 @@ function formatInvoiceListHtml(invoices) {
         <p class="invoice--date">Due ${invoice.paymentDue}</p>
         <p class="invoice--name" >${invoice.clientName}</p>
         <p class="invoice--total" >R$ ${invoice.total}</p>
-        <div class="invoice--status--box invoice--status--${invoice.status}">
-          <p class="invoice--status" >${invoice.status}</p>
+        <form id="patchForm">
+        <div class="invoice--status--box invoice--status--box--${invoice.status}">
+          <button value=${invoice.id} class="invoice--status invoice--status--${invoice.status}" >${invoice.status}</button>
         </div>
+        </form>
         <form id="deleteForm">
           <button value="${invoice.id}" class="button button--trash"></button>
         </form>
@@ -45,15 +47,28 @@ async function handleDelete(event) {
   handleRemoveClass("delete--screen", "delete--screen--disable");//open delete window
 }
 
+async function handlePatch(event) {
+  event.preventDefault();
+  idInvoice = event.target.value;
+  statusInvoice = event.target.textContent;
+
+  handleRemoveClass("patch--screen", "patch--screen--disable");//open update window
+}
+
 function buildInvoiceList(invoices) {
   const el = document.querySelector('[data-invoices="1"]');
   el.innerHTML = invoices.join("");
 
   const deleteElements = document.querySelectorAll("#deleteForm");
+  const patchElements = document.querySelectorAll("#patchForm")
 
   deleteElements.forEach((deleteEl)=>{
     deleteEl.addEventListener("click", handleDelete);
   });
+
+  patchElements.forEach((patchEl) => {
+    patchEl.addEventListener("click", handlePatch);
+  })
 }
 
 async function handleResponse() {
@@ -97,12 +112,13 @@ async function handleSubmit(event) {
 //---responsable for the delete fetch---//
 
 let idInvoice;
+let statusInvoice;
 
-const confirmButton = document.querySelector("#confirmDeleteButton");
-confirmButton.addEventListener("click" , handleConfirmDelete);
+const confirmDeleteButton = document.querySelector("#confirmDeleteButton");
+confirmDeleteButton.addEventListener("click" , handleConfirmDelete);
 
-const cancelButton = document.querySelector("#cancelDeleteButton");
-cancelButton.addEventListener("click" , () => handleAddClass("delete--screen", "delete--screen--disable"));
+const cancelDeleteButton = document.querySelector("#cancelDeleteButton");
+cancelDeleteButton.addEventListener("click" , () => handleAddClass("delete--screen", "delete--screen--disable"));
 
 async function handleFetchDelete(id){
   await fetch(`${BASE_URL}/${id}`, {method:"DELETE"});
@@ -117,6 +133,31 @@ async function handleConfirmDelete() {
   handleAddClass("delete--screen", "delete--screen--disable");
 }
 
+//--responsable for the patch fetch--//
+
+async function handleFetchPatch(id) {
+  const newStatus = statusInvoice === 'pending' ? 'paid' : 'pending';
+
+    fetch(`${BASE_URL}/${id}` , {
+      method: "PATCH", headers: { "Content-type": "application/json" }, body: JSON.stringify({
+        status: newStatus})});
+
+}
+
+const confirmPatchButton = document.querySelector("#confirmPatchButton");
+confirmPatchButton.addEventListener("click" , handleConfirmPatch);
+
+const cancelPatchButton = document.querySelector("#cancelPatchButton");
+cancelPatchButton.addEventListener("click" , () => handleAddClass("patch--screen", "patch--screen--disable"));
+
+async function handleConfirmPatch() {
+
+  await handleFetchPatch(idInvoice);
+
+  await handleResponse();
+
+  handleAddClass("patch--screen", "patch--screen--disable");
+}
 
 
 // async function handleSubmit(event) {

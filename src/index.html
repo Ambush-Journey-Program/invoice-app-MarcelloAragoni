@@ -41,12 +41,26 @@
       <p class="found--info">Create an invoice by clicking the New Invoice button and get started</p>
     </div>
 
+    <div id="patch--screen" class="patch--screen patch--screen--disable">
+      <div class="patch__screen--text">
+        <h2 class="patch__screen--title">Alteração de Invoice</h2>
+        <p class="patch__screen--content">Tem certeza que deseja Alterar o status do invoice?</p>
+        <div class="button--container">
+          <button id="cancelPatchButton" class="button button--patch">Não</button>
+          <button id="confirmPatchButton" class="button button--patch">Sim</button>
+        </div>
+      </div>
+      <div class="patch--layer"></div>
+    </div>
+
     <div id="delete--screen" class="delete--screen delete--screen--disable">
       <div class="delete__screen--text">
         <h2 class="delete__screen--title">Exclusão de Invoice</h2>
         <p class="delete__screen--content">Tem certeza que deseja excluir o invoice?</p>
-        <button id="cancelDeleteButton" class="button button--delete">Não</button>
-        <button id="confirmDeleteButton" value="sim" class="button button--delete">Sim</button>
+        <div class="button--container">
+          <button id="cancelDeleteButton" class="button button--delete">Não</button>
+          <button id="confirmDeleteButton" class="button button--delete">Sim</button>
+        </div>
       </div>
       <div class="delete--layer"></div>
     </div>

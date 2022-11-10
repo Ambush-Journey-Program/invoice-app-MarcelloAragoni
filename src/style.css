@@ -92,6 +92,15 @@ body {
   margin-right: 2.5rem;
 }
 
+#patchForm {
+  display: flex;
+  text-transform: capitalize;
+  text-align: center;
+  font-weight: 700;
+  flex: 1;
+  border-radius: 0.5rem;
+}
+
 .invoice--status--box {
   text-transform: capitalize;
   width: 6.5;
@@ -104,23 +113,38 @@ body {
 }
 
 .invoice--status {
+  text-transform: capitalize;
+  background-color: transparent;
+  margin-top: 0.8125rem;
+  border: none;
   margin-top: 0.8125rem;
 }
 
-.invoice--status--paid {
+.invoice--status--box--paid {
   background-color: var(--green);
+  font-weight: bold;
+  flex: 1;
+}
+
+.invoice--status--box--pending {
+  background-color: var(--light-orange);
+}
+
+.invoice--status--box--draft {
+  background-color: var(--light-gray);
+}
+
+.invoice--status--paid {
   color: var(--dark-green);
   font-weight: bold;
   flex: 1;
 }
 
 .invoice--status--pending {
-  background-color: var(--light-orange);
   color: var(--orange);
 }
 
 .invoice--status--draft {
-  background-color: var(--light-gray);
   color: var(--dark-gray);
 }
 
@@ -280,4 +304,75 @@ body {
   bottom: 0;
   background-color: rgba(20, 20, 20, 0.5);
   z-index: 100;
+}
+
+.patch--screen{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 101;
+  background-size: cover;
+  padding: 20px;
+}
+
+#formConfirm{
+  margin-top: 2rem;
+  z-index: 9999;
+}
+
+.patch--screen--disable {
+  display: none;
+}
+
+.patch__screen--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  width: 500px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 101;
+  background-color: var(--white);
+}
+
+.patch__screen--title {
+  color: var(--button);
+  font-weight: bold;
+  font-size: 38px;
+}
+
+.patch__screen--content {
+  margin-top: 2rem;
+  font-size: 20px;
+  width: 350px;
+}
+
+.button--patch {
+  margin-left: 2rem;
+}
+
+.patch--layer{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(20, 20, 20, 0.5);
+  z-index: 100;
+}
+
+.button--container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
 }
